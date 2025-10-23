@@ -163,14 +163,26 @@ def main():
     """Huvudfunktion för anonymisering"""
     anonymizer = ExcelAnonymizer()
     
-    input_file = "results_for_survey_596702594.xlsx"
-    output_file = "exempel_data_anonymiserad.xlsx"
+    # För framtida användning - lägg originalfil här
+    input_file = "din_original_fil.xlsx"  # Användaren byter ut denna
+    output_file = "data/exempel_data.xlsx"
     
     print("🔒 ANONYMISERING AV EXCEL-FIL")
     print("=" * 40)
     print("⚠️  VIKTIGT: Detta ersätter känslig information med generiska värden")
     print("📋 Original fil behålls oförändrad")
+    print(f"📁 Lägg din originalfil som: {input_file}")
     print()
+    
+    # Kontrollera om filen finns
+    import os
+    if not os.path.exists(input_file):
+        print(f"❌ Filen '{input_file}' hittades inte")
+        print("📝 För att använda anonymiseringen:")
+        print("   1. Lägg din Excel-fil i projektmappen")
+        print("   2. Byt namn till 'din_original_fil.xlsx' ELLER")
+        print("   3. Ändra 'input_file' variabeln i main() funktionen")
+        return
     
     try:
         anonymizer.anonymize_excel(input_file, output_file)
