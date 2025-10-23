@@ -148,7 +148,7 @@ class LIAReportTemplate:
         """Skapar bedömnings-sektionen"""
         content = []
         
-        content.append(Paragraph("► BEDOMNING", self.styles['SectionHeader']))
+        content.append(Paragraph("► BEDÖMNING", self.styles['SectionHeader']))
         
         assessments = student_data.get('assessments', [])
         
@@ -224,7 +224,7 @@ class LIAReportTemplate:
             else:
                 grade_counts['Ej bedömt'] += 1
         
-        content.append(Paragraph("▪ BETYGSFORDELNING", self.styles['SubHeader']))
+        content.append(Paragraph("▪ BETYGSFÖRDELNING", self.styles['SubHeader']))
         
         # Skapa statistik-tabell
         stats_data = []
