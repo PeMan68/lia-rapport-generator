@@ -39,7 +39,14 @@ Skapa ett Python-verktyg som konverterar Excel-fil med studentomdömen till indi
 - [ ] 📊 Logging och felsökning
 - [ ] 🧪 Enhetstester
 
-### **Fas 5: Distribution**
+### **Fas 5: Optimering & Rensning**
+- [ ] 🧹 Ta bort utvecklingsscript (analyze_excel.py, anonymize_data.py)
+- [ ] 📁 Organisera projektstruktur för distribution
+- [ ] 📝 Uppdatera dokumentation för slutanvändare
+- [ ] 🔍 Kod-granskning och refaktorering
+- [ ] 🗑️ Ta bort data/exempel_data.xlsx (användare ska välja egen fil)
+
+### **Fas 6: Distribution**
 - [ ] 📦 PyInstaller-konfiguration
 - [ ] 🎯 Skapa .exe-fil
 - [ ] 📖 Användarmanual för kollegor
@@ -102,8 +109,9 @@ RapportFrån LIA/
 ## 📊 MILSTOLPAR
 1. **V1.0 - MVP:** Grundläggande Excel → PDF (1 vecka)
 2. **V1.1 - GUI:** Användarvänligt gränssnitt (3 dagar)
-3. **V1.2 - EXE:** Distribuerbar .exe-fil (2 dagar)
-4. **V1.3 - PROD:** Färdig för kollegor (1 dag)
+3. **V1.2 - POLISH:** Optimering och rensning (1 dag)
+4. **V1.3 - EXE:** Distribuerbar .exe-fil (2 dagar)
+5. **V1.4 - PROD:** Färdig för kollegor (1 dag)
 
 ---
 
