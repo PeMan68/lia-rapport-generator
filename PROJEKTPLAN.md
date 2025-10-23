@@ -28,10 +28,10 @@ Skapa ett Python-verktyg som konverterar Excel-fil med studentomdömen till indi
 - [x] ✅ Testa med befintlig Excel-fil
 
 ### **Fas 3: Användargränssnitt**
-- [ ] 🖥️ GUI för filval (Excel-fil)
-- [ ] 📂 GUI för utdatamapp
-- [ ] ⚙️ Inställningar och konfiguration
-- [ ] 🔄 Progress bar för generering
+- [x] 🖥️ GUI för filval (Excel-fil)
+- [x] 📂 GUI för utdatamapp
+- [x] ⚙️ Inställningar och konfiguration
+- [x] 🔄 Progress bar för generering
 
 ### **Fas 4: Robusthet & Felhantering**
 - [ ] 🛡️ Validering av Excel-filformat
@@ -100,9 +100,12 @@ RapportFrån LIA/
 - [x] PDF-rapportmall (LIAReportTemplate)
 - [x] PDF-generator (LIAPDFGenerator)
 - [x] Testat med alla 11 studenter - fungerar perfekt!
+- [x] GUI för användarvänlighet (tkinter)
+- [x] Huvudapplikation (main.py)
+- [x] Komplett dokumentation (README.md)
 
 ### 🟡 Pågående
-- [ ] GUI för användarvänlighet
+- [ ] Robusthet och felhantering
 
 ### 🔴 Att göra
 - [ ] Alla andra punkter enligt plan
