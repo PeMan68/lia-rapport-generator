@@ -97,7 +97,7 @@ class LIAReportTemplate:
         story = []
         
         # Rubrik
-        story.append(Paragraph("🎓 PRAKTIKRAPPORT - LIA", self.styles['CustomTitle']))
+        story.append(Paragraph("PRAKTIKRAPPORT - LIA", self.styles['CustomTitle']))
         story.append(Spacer(1, 20))
         
         # Grundinfo
@@ -116,7 +116,7 @@ class LIAReportTemplate:
         """Skapar grundinformation-sektionen"""
         content = []
         
-        content.append(Paragraph("📍 PRAKTIKPLATS", self.styles['SectionHeader']))
+        content.append(Paragraph("► PRAKTIKPLATS", self.styles['SectionHeader']))
         
         # Grunddata tabell
         basic_data = [
@@ -148,7 +148,7 @@ class LIAReportTemplate:
         """Skapar bedömnings-sektionen"""
         content = []
         
-        content.append(Paragraph("📊 BEDÖMNING", self.styles['SectionHeader']))
+        content.append(Paragraph("► BEDOMNING", self.styles['SectionHeader']))
         
         assessments = student_data.get('assessments', [])
         
@@ -175,7 +175,7 @@ class LIAReportTemplate:
         """Skapar sammanfattnings-sektionen"""
         content = []
         
-        content.append(Paragraph("🎯 SAMMANFATTNING", self.styles['SectionHeader']))
+        content.append(Paragraph("► SAMMANFATTNING", self.styles['SectionHeader']))
         
         # Helhetsintryck
         overall = student_data.get('overall_impression', '')
@@ -224,7 +224,7 @@ class LIAReportTemplate:
             else:
                 grade_counts['Ej bedömt'] += 1
         
-        content.append(Paragraph("📈 BETYGSFÖRDELNING", self.styles['SubHeader']))
+        content.append(Paragraph("▪ BETYGSFORDELNING", self.styles['SubHeader']))
         
         # Skapa statistik-tabell
         stats_data = []
@@ -256,19 +256,12 @@ class LIAReportTemplate:
         return content
     
     def _format_grade(self, grade):
-        """Formaterar betyg med emoji"""
+        """Formaterar betyg enkelt utan extra symboler"""
         if not grade:
             return "Ej bedömt"
         
-        grade_lower = grade.lower()
-        if '3' in grade_lower or 'mycket bra' in grade_lower:
-            return f"🟢 {grade}"
-        elif '2' in grade_lower or 'bra' in grade_lower:
-            return f"🟡 {grade}"
-        elif '1' in grade_lower or 'förbättras' in grade_lower:
-            return f"🔴 {grade}"
-        else:
-            return grade
+        # Returnera betyget som det är - det innehåller redan all nödvändig info
+        return grade.strip()
 
 
 def main():
