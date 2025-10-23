@@ -16,7 +16,7 @@ Skapa ett Python-verktyg som konverterar Excel-fil med studentomdömen till indi
 ## 📅 PROJEKTFASER
 
 ### **Fas 1: Projektuppsättning** 
-- [ ] 🔄 Skapa Git-repo med Git Flow
+- [x] 🔄 Skapa Git-repo med Git Flow
 - [ ] 📦 Installera nödvändiga Python-paket
 - [ ] 📁 Skapa projektstruktur
 - [ ] 📝 Dokumentera Excel-filstruktur
@@ -86,9 +86,10 @@ RapportFrån LIA/
 - [x] Analyserat Excel-filstruktur (11 studenter, 36 kolumner)
 - [x] Identifierat bedömningsområden (14 st)
 - [x] Valt teknisk stack (Python/reportlab)
+- [x] Git-repo uppsättning med Git Flow
 
 ### 🟡 Pågående
-- [ ] Git-repo uppsättning
+- [ ] Excel-läsare implementation (feature/excel-reader)
 
 ### 🔴 Att göra
 - [ ] Alla andra punkter enligt plan
