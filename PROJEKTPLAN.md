@@ -23,9 +23,9 @@ Skapa ett Python-verktyg som konverterar Excel-fil med studentomdömen till indi
 
 ### **Fas 2: Kärnfunktionalitet**
 - [x] 📊 Excel-läsare (parsing av studentdata)
-- [ ] 🎨 PDF-rapportmall (design och layout)
-- [ ] 🔄 PDF-generator (en rapport per student)
-- [ ] ✅ Testa med befintlig Excel-fil
+- [x] 🎨 PDF-rapportmall (design och layout)
+- [x] 🔄 PDF-generator (en rapport per student)
+- [x] ✅ Testa med befintlig Excel-fil
 
 ### **Fas 3: Användargränssnitt**
 - [ ] 🖥️ GUI för filval (Excel-fil)
@@ -97,9 +97,12 @@ RapportFrån LIA/
 - [x] Excel-läsare implementation (LIAExcelReader)
 - [x] Projektstruktur skapad
 - [x] Requirements.txt med dependencies
+- [x] PDF-rapportmall (LIAReportTemplate)
+- [x] PDF-generator (LIAPDFGenerator)
+- [x] Testat med alla 11 studenter - fungerar perfekt!
 
 ### 🟡 Pågående
-- [ ] PDF-rapportmall design
+- [ ] GUI för användarvänlighet
 
 ### 🔴 Att göra
 - [ ] Alla andra punkter enligt plan
