@@ -50,7 +50,7 @@ class LIAReportTemplate:
             fontSize=12,
             spaceAfter=8,
             spaceBefore=12,
-            textColor=colors.HexColor('#7F8C8D'),
+            textColor=colors.black,
             fontName='Helvetica-Bold'
         ))
         
@@ -69,16 +69,18 @@ class LIAReportTemplate:
             spaceAfter=4,
             leftIndent=20,
             fontName='Helvetica',
-            textColor=colors.HexColor('#5D6D7E')
+            textColor=colors.black
         ))
     
-    def create_report(self, student_data, output_path):
+    def create_report(self, student_data, output_path, practice_name="", practice_period=""):
         """
         Skapar en PDF-rapport för en student
         
         Args:
             student_data (dict): Studentdata från Excel-läsaren
             output_path (str): Sökväg där PDF ska sparas
+            practice_name (str): Namn på praktiken
+            practice_period (str): Period för praktiken
         """
         # Skapa output-mapp om den inte finns
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -96,12 +98,19 @@ class LIAReportTemplate:
         # Bygg innehåll
         story = []
         
-        # Rubrik
-        story.append(Paragraph("PRAKTIKRAPPORT - LIA", self.styles['CustomTitle']))
+        # Rubrik med praktikinfo
+        title_parts = ["PRAKTIKRAPPORT - LIA"]
+        if practice_name:
+            title_parts.append(f"<br/>{practice_name}")
+        if practice_period:
+            title_parts.append(f"<br/>Period: {practice_period}")
+        
+        title_text = "".join(title_parts)
+        story.append(Paragraph(title_text, self.styles['CustomTitle']))
         story.append(Spacer(1, 20))
         
         # Grundinfo
-        story.extend(self._create_basic_info_section(student_data))
+        story.extend(self._create_basic_info_section(student_data, practice_name, practice_period))
         
         # Bedömningar
         story.extend(self._create_assessments_section(student_data))
@@ -112,19 +121,25 @@ class LIAReportTemplate:
         # Generera PDF
         doc.build(story)
         
-    def _create_basic_info_section(self, student_data):
+    def _create_basic_info_section(self, student_data, practice_name="", practice_period=""):
         """Skapar grundinformation-sektionen"""
         content = []
         
         content.append(Paragraph("► PRAKTIKPLATS", self.styles['SectionHeader']))
         
-        # Grunddata tabell
+        # Grunddata tabell med praktikinfo
         basic_data = [
             ['Student:', student_data.get('student_name', '')],
             ['Företag:', student_data.get('company', '')],
             ['Handledare:', student_data.get('supervisor', '')],
             ['Närvarotid:', student_data.get('attendance', '')]
         ]
+        
+        # Lägg till praktikinfo om det finns
+        if practice_name:
+            basic_data.append(['Praktiknamn:', practice_name])
+        if practice_period:
+            basic_data.append(['Period:', practice_period])
         
         basic_table = Table(basic_data, colWidths=[4*cm, 12*cm])
         basic_table.setStyle(TableStyle([
@@ -148,7 +163,7 @@ class LIAReportTemplate:
         """Skapar bedömnings-sektionen"""
         content = []
         
-        content.append(Paragraph("► BEDOMNING", self.styles['SectionHeader']))
+        content.append(Paragraph("► BEDÖMNING", self.styles['SectionHeader']))
         
         assessments = student_data.get('assessments', [])
         
@@ -224,7 +239,7 @@ class LIAReportTemplate:
             else:
                 grade_counts['Ej bedömt'] += 1
         
-        content.append(Paragraph("▪ BETYGSFORDELNING", self.styles['SubHeader']))
+        content.append(Paragraph("▪ BETYGSFÖRDELNING", self.styles['SubHeader']))
         
         # Skapa statistik-tabell
         stats_data = []

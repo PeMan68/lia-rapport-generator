@@ -1,18 +1,37 @@
 # 📊 Data-mapp
 
 ## 📋 Beskrivning
-Denna mapp innehåller exempel-data för utveckling och testning av PDF-rapportgeneratorn.
+Denna mapp innehåller exempel-data för utveckling och testning av PDF-rapportgeneratorn. Applikationen stödjer nu **flexibla Excel-format** och anpassar sig automatiskt till olika strukturer.
 
 ## 📁 Filer
 
-### `exempel_data.xlsx`
+### `exempel_data.xlsx` - Webbutveckling Format
 - **Anonymiserad** Excel-fil för utveckling
+- **Studenter**: 11
+- **Bedömningsområden**: 14 (Q5-Q32)
+- **Slutbetyg**: Q33 "Helhetsintryck"
+- **Fokus**: Webbutveckling och digitala färdigheter
 - Baserad på verkligt LIA-data men med:
   - Generiska studentnamn
   - Generiska företagsnamn  
   - Generiska handledarnamn
   - Generaliserade kommentarer
 - **Säker att dela** och committa till git
+
+### `results_for_survey_586559445.xlsx` - Processteknik Format  
+- **Verklig data** för testning
+- **Studenter**: 18
+- **Bedömningsområden**: 12 (Q5-Q28)
+- **Slutbetyg**: Q29 "Helhetsintryck"
+- **Fokus**: Processteknisk tillverkning och automation
+
+## 🔧 Automatisk formatidentifiering
+
+Applikationen identifierar automatiskt:
+- ✅ Antal studenter och bedömningsområden
+- ✅ Kolumnstruktur och Q-frågor
+- ✅ Slutbetyg och kommentarsektioner
+- ✅ Grundläggande information (namn, företag, handledare)
 
 ## ⚠️ Viktigt för utvecklare
 
