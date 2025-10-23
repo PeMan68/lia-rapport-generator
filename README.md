@@ -1,15 +1,17 @@
 # 🎓 LIA Rapportgenerator
 
 ## 📋 Beskrivning
-Automatisk generator för individuella PDF-rapporter från Excel-fil med LIA-bedömningar. Skapar professionella rapporter för varje student baserat på praktikbedömningar.
+Automatisk generator för individuella PDF-rapporter från Excel-fil med LIA-bedömningar. Skapar professionella rapporter för varje student baserat på praktikbedömningar. **Anpassar sig automatiskt till olika Excel-format** med liknande struktur.
 
 ## ✨ Funktioner
-- 📊 Läser Excel-filer med LIA-bedömningar
+- 📊 **Flexibel Excel-läsning**: Anpassar sig automatiskt till olika filformat och antal bedömningsområden
 - 📄 Genererar individuella PDF-rapporter per student
 - 🎨 Professionell layout med strukturerade sektioner
 - 🖥️ Användarvänligt grafiskt gränssnitt
-- ✅ Validering av Excel-filstruktur
+- 🏢 Anpassningsbara praktiknamn och period i rapporter
+- ✅ **Automatisk strukturvalidering**: Identifierar kolumner och bedömningsområden automatiskt
 - 📁 Automatisk filorganisering med säkra filnamn
+- 🔧 **Stödjer olika Q-frågeformat**: Fungerar med Q1-Q30, Q1-Q34, och andra varianter
 
 ## 🚀 Komma igång
 
@@ -27,25 +29,36 @@ python main.py
 ```
 
 ### 📝 Användning
-1. **Välj Excel-fil**: Klicka "Välj fil..." och välj din Excel-fil med LIA-bedömningar
-2. **Välj utdatamapp**: Ange var PDF-rapporterna ska sparas
-3. **Validera**: Klicka "Validera Excel-fil" för att kontrollera innehållet
-4. **Generera**: Klicka "Generera alla rapporter" för att skapa PDF:er
+1. **Praktikinfo**: Ange praktiknamn och period för rapporterna
+2. **Välj Excel-fil**: Klicka "Välj fil..." och välj din Excel-fil med LIA-bedömningar
+   - ✅ Stödjer olika format (Q1-Q30, Q1-Q34, etc.)
+   - ✅ Automatisk strukturidentifiering
+3. **Välj utdatamapp**: Ange var PDF-rapporterna ska sparas
+4. **Validera**: Klicka "Validera Excel-fil" för att kontrollera innehållet
+5. **Generera**: Klicka "Generera alla rapporter" för att skapa PDF:er
 
 ## 📊 Excel-filformat
 
-### Obligatoriska kolumner:
-- `Q1: Namn Yh-studerande` - Studentens namn
-- `Q2: Namn företag` - Företagsnamn
-- `Q3: Namn handledare` - Handledarens namn
-- `Q4: Närvarotimmar vid företaget` - Närvarotid
-- `Q33: Helhetsintryck` - Slutbetyg
-- `Q34: Kommentarer` - Avslutande kommentarer
+### 🔧 Flexibel strukturstöd
+Applikationen anpassar sig automatiskt till olika Excel-format med liknande struktur:
 
-### Bedömningsområden (Q5-Q32):
-Varje bedömningsområde har två kolumner:
-- Betyg (t.ex. "Q5: Arbetets kvalitet...")
-- Kommentar (t.ex. "Q6: Kommentar")
+### Obligatoriska kolumner (identifieras automatiskt):
+- **Studentnamn**: Kolumner som innehåller "namn" + "studerande" eller "student"
+- **Företag**: Kolumner som innehåller "företag" eller "company"
+- **Handledare**: Kolumner som innehåller "handledare" eller "supervisor"
+- **Närvarotid**: Kolumner som innehåller "närvarotimmar" eller "närvaro"
+- **Slutbetyg**: Kolumner som innehåller "helhetsintryck" eller "slutbetyg"
+- **Slutkommentarer**: Kolumner som slutar med "kommentarer"
+
+### Bedömningsområden:
+- **Flexibelt Q-format**: Stödjer Q1-Q30, Q1-Q34, Q1-Q40, etc.
+- **Automatisk identifiering**: Hittar bedömningsområden och tillhörande kommentarer automatiskt
+- **Varierande antal**: Anpassar sig till olika antal bedömningsområden per fil
+
+### Exempel på stödda format:
+- **Format 1**: Q1-Q34 (14 bedömningsområden) - Webbutveckling
+- **Format 2**: Q1-Q30 (12 bedömningsområden) - Processteknik
+- **Format 3**: Andra varianter med liknande struktur
 
 **Betygsskala**: "3 Mycket bra", "2 Bra", "1 Bör förbättras"
 

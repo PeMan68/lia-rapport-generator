@@ -9,7 +9,7 @@ from typing import List, Dict
 from datetime import datetime
 
 # Importera våra moduler
-from excel_reader import LIAExcelReader
+from flexible_excel_reader import FlexibleLIAExcelReader
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'templates'))
@@ -39,13 +39,21 @@ class LIAPDFGenerator:
         """
         try:
             logger.info(f"Laddar Excel-fil: {file_path}")
-            self.excel_reader = LIAExcelReader(file_path)
+            self.excel_reader = FlexibleLIAExcelReader(file_path)
             
             if not self.excel_reader.load_excel():
                 logger.error("Kunde inte ladda Excel-fil")
                 return False
             
-            self.students_data = self.excel_reader.extract_student_data()
+            if not self.excel_reader.auto_detect_structure():
+                logger.error("Kunde inte analysera Excel-struktur")
+                return False
+            
+            if not self.excel_reader.extract_student_data():
+                logger.error("Kunde inte extrahera studentdata")
+                return False
+            
+            self.students_data = self.excel_reader.students_data
             
             if not self.students_data:
                 logger.error("Ingen studentdata hittades i Excel-filen")
@@ -58,12 +66,14 @@ class LIAPDFGenerator:
             logger.error(f"Fel vid laddning av Excel-fil: {e}")
             return False
     
-    def generate_all_reports(self, output_directory: str) -> Dict[str, str]:
+    def generate_all_reports(self, output_directory: str, practice_name: str = "", practice_period: str = "") -> Dict[str, str]:
         """
         Genererar PDF-rapporter för alla studenter
         
         Args:
             output_directory (str): Mapp där PDF-filer ska sparas
+            practice_name (str): Namn på praktiken
+            practice_period (str): Period för praktiken
             
         Returns:
             Dict[str, str]: Mapping av studentnamn till filsökvägar
@@ -89,7 +99,13 @@ class LIAPDFGenerator:
                 output_path = os.path.join(output_directory, f"LIA_Rapport_{safe_filename}.pdf")
                 
                 # Generera PDF
-                self.pdf_template.create_report(student, output_path)
+                template = LIAReportTemplate()
+                pdf_path = template.create_report(
+                    student_data=student,
+                    output_path=output_path,
+                    practice_name=practice_name,
+                    practice_period=practice_period
+                )
                 
                 generated_files[student_name] = output_path
                 successful_count += 1
@@ -202,14 +218,17 @@ class LIAPDFGenerator:
             Dict: Valideringsresultat
         """
         try:
-            temp_reader = LIAExcelReader(file_path)
+            temp_reader = FlexibleLIAExcelReader(file_path)
             if not temp_reader.load_excel():
                 return {'valid': False, 'error': 'Kunde inte läsa Excel-fil'}
             
-            if not temp_reader.validate_structure():
-                return {'valid': False, 'error': 'Excel-filen har inte rätt struktur'}
+            if not temp_reader.auto_detect_structure():
+                return {'valid': False, 'error': 'Kunde inte analysera Excel-struktur'}
             
-            students = temp_reader.extract_student_data()
+            if not temp_reader.extract_student_data():
+                return {'valid': False, 'error': 'Kunde inte extrahera studentdata'}
+            
+            students = temp_reader.students_data
             if not students:
                 return {'valid': False, 'error': 'Ingen studentdata hittades'}
             

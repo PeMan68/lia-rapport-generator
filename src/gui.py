@@ -30,11 +30,15 @@ class LIAReportGUI:
         # Variabler
         self.excel_file_path = tk.StringVar()
         self.output_directory = tk.StringVar()
+        self.practice_name = tk.StringVar()
+        self.practice_period = tk.StringVar()
         self.generator = LIAPDFGenerator()
         self.students_data = []
         
-        # Sätt default output directory
+        # Sätt default värden
         self.output_directory.set(os.path.join(os.getcwd(), "output"))
+        self.practice_name.set("LIA - Lärande i Arbete")
+        self.practice_period.set("Vecka 20-23 2025")
         
         self.setup_ui()
         
@@ -62,9 +66,34 @@ class LIAReportGUI:
         )
         title_label.grid(row=0, column=0, columnspan=3, pady=(0, 20))
         
-        # Excel-fil sektion
-        ttk.Label(main_frame, text="1. Välj Excel-fil:", font=("Arial", 12, "bold")).grid(
+        # Praktikinfo sektion
+        ttk.Label(main_frame, text="1. Praktikuppgifter:", font=("Arial", 12, "bold")).grid(
             row=1, column=0, columnspan=3, sticky=tk.W, pady=(0, 5)
+        )
+        
+        # Praktiknamn
+        ttk.Label(main_frame, text="Praktiknamn:").grid(
+            row=2, column=0, sticky=tk.W, padx=(0, 10)
+        )
+        ttk.Entry(
+            main_frame, 
+            textvariable=self.practice_name, 
+            width=40
+        ).grid(row=2, column=1, sticky=tk.W, padx=(0, 10))
+        
+        # Praktikperiod
+        ttk.Label(main_frame, text="Period:").grid(
+            row=3, column=0, sticky=tk.W, padx=(0, 10)
+        )
+        ttk.Entry(
+            main_frame, 
+            textvariable=self.practice_period, 
+            width=40
+        ).grid(row=3, column=1, sticky=tk.W, padx=(0, 10))
+        
+        # Excel-fil sektion
+        ttk.Label(main_frame, text="2. Välj Excel-fil:", font=("Arial", 12, "bold")).grid(
+            row=4, column=0, columnspan=3, sticky=tk.W, pady=(20, 5)
         )
         
         ttk.Entry(
@@ -72,34 +101,34 @@ class LIAReportGUI:
             textvariable=self.excel_file_path, 
             width=60,
             state="readonly"
-        ).grid(row=2, column=0, columnspan=2, sticky=(tk.W, tk.E), padx=(0, 10))
+        ).grid(row=5, column=0, columnspan=2, sticky=(tk.W, tk.E), padx=(0, 10))
         
         ttk.Button(
             main_frame, 
             text="Välj fil...", 
             command=self.select_excel_file
-        ).grid(row=2, column=2, sticky=tk.W)
+        ).grid(row=5, column=2, sticky=tk.W)
         
         # Output-mapp sektion
-        ttk.Label(main_frame, text="2. Välj utdatamapp:", font=("Arial", 12, "bold")).grid(
-            row=3, column=0, columnspan=3, sticky=tk.W, pady=(20, 5)
+        ttk.Label(main_frame, text="3. Välj utdatamapp:", font=("Arial", 12, "bold")).grid(
+            row=6, column=0, columnspan=3, sticky=tk.W, pady=(20, 5)
         )
         
         ttk.Entry(
             main_frame, 
             textvariable=self.output_directory, 
             width=60
-        ).grid(row=4, column=0, columnspan=2, sticky=(tk.W, tk.E), padx=(0, 10))
+        ).grid(row=7, column=0, columnspan=2, sticky=(tk.W, tk.E), padx=(0, 10))
         
         ttk.Button(
             main_frame, 
             text="Välj mapp...", 
             command=self.select_output_directory
-        ).grid(row=4, column=2, sticky=tk.W)
+        ).grid(row=7, column=2, sticky=tk.W)
         
         # Validering och förhandsvisning
-        validation_frame = ttk.LabelFrame(main_frame, text="3. Förhandsvisning", padding="10")
-        validation_frame.grid(row=5, column=0, columnspan=3, sticky=(tk.W, tk.E, tk.N, tk.S), pady=(20, 0))
+        validation_frame = ttk.LabelFrame(main_frame, text="4. Förhandsvisning", padding="10")
+        validation_frame.grid(row=8, column=0, columnspan=3, sticky=(tk.W, tk.E, tk.N, tk.S), pady=(20, 0))
         validation_frame.columnconfigure(0, weight=1)
         
         # Info-text
@@ -146,10 +175,11 @@ class LIAReportGUI:
         # Initial info
         self.display_info("Välkommen till LIA Rapportgenerator!\n\n"
                          "Steg:\n"
-                         "1. Välj din Excel-fil med LIA-bedömningar\n"
-                         "2. Välj mapp där PDF-rapporter ska sparas\n"
-                         "3. Klicka 'Validera Excel-fil' för att kontrollera\n"
-                         "4. Klicka 'Generera alla rapporter' för att skapa PDF:er\n\n"
+                         "1. Ange praktiknamn och period\n"
+                         "2. Välj din Excel-fil med LIA-bedömningar\n"
+                         "3. Välj mapp där PDF-rapporter ska sparas\n"
+                         "4. Klicka 'Validera Excel-fil' för att kontrollera\n"
+                         "5. Klicka 'Generera alla rapporter' för att skapa PDF:er\n\n"
                          "Tips: Excel-filen bör ha kolumner som 'Q1: Namn Yh-studerande', "
                          "'Q2: Namn företag', etc.")
     
@@ -286,6 +316,8 @@ class LIAReportGUI:
         try:
             excel_path = self.excel_file_path.get()
             output_dir = self.output_directory.get()
+            practice_name = self.practice_name.get().strip()
+            practice_period = self.practice_period.get().strip()
             
             # Ladda Excel-data
             self.root.after(0, self._update_progress, 0, "Laddar Excel-data...")
@@ -293,8 +325,12 @@ class LIAReportGUI:
             if not self.generator.load_excel_file(excel_path):
                 raise Exception("Kunde inte ladda Excel-fil")
             
-            # Generera rapporter
-            generated_files = self.generator.generate_all_reports(output_dir)
+            # Generera rapporter med praktikinfo
+            generated_files = self.generator.generate_all_reports(
+                output_dir, 
+                practice_name=practice_name,
+                practice_period=practice_period
+            )
             
             # Uppdatera GUI med resultat
             self.root.after(0, self._handle_generation_result, generated_files, output_dir)
