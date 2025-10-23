@@ -51,3 +51,7 @@ htmlcov/
 results_for_survey_*.xlsx
 *_original.xlsx
 *_real_data.xlsx
+
+# Excel tillfälliga filer
+~$*.xlsx
+~$*.xls
