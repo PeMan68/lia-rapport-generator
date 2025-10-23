@@ -46,3 +46,8 @@ logs/
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Känsliga filer - exkludera från git
+results_for_survey_*.xlsx
+*_original.xlsx
+*_real_data.xlsx

@@ -301,8 +301,8 @@ class LIAExcelReader:
 
 def main():
     """Testfunktion för Excel-läsaren"""
-    # Testa med vår Excel-fil
-    reader = LIAExcelReader("../results_for_survey_596702594.xlsx")
+    # Testa med anonymiserad Excel-fil
+    reader = LIAExcelReader("../data/exempel_data.xlsx")
     
     if reader.load_excel():
         students = reader.extract_student_data()

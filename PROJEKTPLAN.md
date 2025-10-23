@@ -17,12 +17,12 @@ Skapa ett Python-verktyg som konverterar Excel-fil med studentomdömen till indi
 
 ### **Fas 1: Projektuppsättning** 
 - [x] 🔄 Skapa Git-repo med Git Flow
-- [ ] 📦 Installera nödvändiga Python-paket
-- [ ] 📁 Skapa projektstruktur
-- [ ] 📝 Dokumentera Excel-filstruktur
+- [x] 📦 Installera nödvändiga Python-paket
+- [x] 📁 Skapa projektstruktur
+- [x] 📝 Dokumentera Excel-filstruktur
 
 ### **Fas 2: Kärnfunktionalitet**
-- [ ] 📊 Excel-läsare (parsing av studentdata)
+- [x] 📊 Excel-läsare (parsing av studentdata)
 - [ ] 🎨 PDF-rapportmall (design och layout)
 - [ ] 🔄 PDF-generator (en rapport per student)
 - [ ] ✅ Testa med befintlig Excel-fil
@@ -87,9 +87,12 @@ RapportFrån LIA/
 - [x] Identifierat bedömningsområden (14 st)
 - [x] Valt teknisk stack (Python/reportlab)
 - [x] Git-repo uppsättning med Git Flow
+- [x] Excel-läsare implementation (LIAExcelReader)
+- [x] Projektstruktur skapad
+- [x] Requirements.txt med dependencies
 
 ### 🟡 Pågående
-- [ ] Excel-läsare implementation (feature/excel-reader)
+- [ ] PDF-rapportmall design
 
 ### 🔴 Att göra
 - [ ] Alla andra punkter enligt plan
