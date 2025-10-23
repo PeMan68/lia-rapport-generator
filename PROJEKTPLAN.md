@@ -16,13 +16,13 @@ Skapa ett Python-verktyg som konverterar Excel-fil med studentomdömen till indi
 ## 📅 PROJEKTFASER
 
 ### **Fas 1: Projektuppsättning** 
-- [ ] 🔄 Skapa Git-repo med Git Flow
-- [ ] 📦 Installera nödvändiga Python-paket
-- [ ] 📁 Skapa projektstruktur
-- [ ] 📝 Dokumentera Excel-filstruktur
+- [x] 🔄 Skapa Git-repo med Git Flow
+- [x] 📦 Installera nödvändiga Python-paket
+- [x] 📁 Skapa projektstruktur
+- [x] 📝 Dokumentera Excel-filstruktur
 
 ### **Fas 2: Kärnfunktionalitet**
-- [ ] 📊 Excel-läsare (parsing av studentdata)
+- [x] 📊 Excel-läsare (parsing av studentdata)
 - [ ] 🎨 PDF-rapportmall (design och layout)
 - [ ] 🔄 PDF-generator (en rapport per student)
 - [ ] ✅ Testa med befintlig Excel-fil
@@ -39,7 +39,14 @@ Skapa ett Python-verktyg som konverterar Excel-fil med studentomdömen till indi
 - [ ] 📊 Logging och felsökning
 - [ ] 🧪 Enhetstester
 
-### **Fas 5: Distribution**
+### **Fas 5: Optimering & Rensning**
+- [ ] 🧹 Ta bort utvecklingsscript (analyze_excel.py, anonymize_data.py)
+- [ ] 📁 Organisera projektstruktur för distribution
+- [ ] 📝 Uppdatera dokumentation för slutanvändare
+- [ ] 🔍 Kod-granskning och refaktorering
+- [ ] 🗑️ Ta bort data/exempel_data.xlsx (användare ska välja egen fil)
+
+### **Fas 6: Distribution**
 - [ ] 📦 PyInstaller-konfiguration
 - [ ] 🎯 Skapa .exe-fil
 - [ ] 📖 Användarmanual för kollegor
@@ -86,9 +93,13 @@ RapportFrån LIA/
 - [x] Analyserat Excel-filstruktur (11 studenter, 36 kolumner)
 - [x] Identifierat bedömningsområden (14 st)
 - [x] Valt teknisk stack (Python/reportlab)
+- [x] Git-repo uppsättning med Git Flow
+- [x] Excel-läsare implementation (LIAExcelReader)
+- [x] Projektstruktur skapad
+- [x] Requirements.txt med dependencies
 
 ### 🟡 Pågående
-- [ ] Git-repo uppsättning
+- [ ] PDF-rapportmall design
 
 ### 🔴 Att göra
 - [ ] Alla andra punkter enligt plan
@@ -98,8 +109,9 @@ RapportFrån LIA/
 ## 📊 MILSTOLPAR
 1. **V1.0 - MVP:** Grundläggande Excel → PDF (1 vecka)
 2. **V1.1 - GUI:** Användarvänligt gränssnitt (3 dagar)
-3. **V1.2 - EXE:** Distribuerbar .exe-fil (2 dagar)
-4. **V1.3 - PROD:** Färdig för kollegor (1 dag)
+3. **V1.2 - POLISH:** Optimering och rensning (1 dag)
+4. **V1.3 - EXE:** Distribuerbar .exe-fil (2 dagar)
+5. **V1.4 - PROD:** Färdig för kollegor (1 dag)
 
 ---
 
