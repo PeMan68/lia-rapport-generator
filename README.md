@@ -1,5 +1,7 @@
 # 🎓 LIA Rapportgenerator
 
+**Version 1.0.0** - Produktionsklar automatisk generator för individuella PDF-rapporter från Excel-fil med LIA-bedömningar.
+
 ## 📋 Beskrivning
 Automatisk generator för individuella PDF-rapporter från Excel-fil med LIA-bedömningar. Skapar professionella rapporter för varje student baserat på praktikbedömningar. **Anpassar sig automatiskt till olika Excel-format** med liknande struktur.
 
