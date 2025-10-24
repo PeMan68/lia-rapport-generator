@@ -38,9 +38,16 @@ Thumbs.db
 
 # Project specific
 output/
-*.exe
 temp/
 logs/
+
+# PyInstaller build files
+build/
+dist/
+*.spec
+
+# Executables (comment out if you want to include exe in git)
+*.exe
 
 # Test files
 .pytest_cache/

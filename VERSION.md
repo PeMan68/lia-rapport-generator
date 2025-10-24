@@ -38,19 +38,29 @@
 - Detaljerad logging
 - Säker filhantering
 
-## 📊 Kapacitet
+### � Exe-distribution
+- **Färdig exe-fil**: `LIA_Rapportgenerator.exe` (42.8 MB)
+- **Inga installationer**: Klicka och kör för lärare
+- **Windows 10/11**: Fullständig kompatibilitet
+- **PyInstaller**: Professionell packaging
+
+## �📊 Kapacitet
 - **Excel-format**: Webbutveckling (14 bedömningsområden), Processteknik (12 bedömningsområden)
 - **Studenter**: 11-18+ studenter per körning
 - **Anpassning**: Automatisk till nya Excel-format
+- **Distribution**: Både exe-fil och Python-källkod
 
 ## 🚀 Installation och användning
-Se `README.md` och `docs/ANVÄNDARMANUAL.md` för detaljerade instruktioner.
+- **Lärare**: Ladda ner `LIA_Rapportgenerator.exe` och dubbelklicka
+- **Utvecklare**: Se `README.md` och `docs/ANVÄNDARMANUAL.md`
+- **IT-avdelningar**: Se `docs/DISTRIBUTION.md` för enterprise-installation
 
 ## 🏆 Kvalitet
 - ✅ Fullständigt testad på flera Excel-format
 - ✅ Validerad svensk teckenhantering
 - ✅ Verifierad intelligent filnamngivning
-- ✅ Produktionsklar för lärarmiljöer
+- ✅ Produktionsklar exe-fil för Windows
+- ✅ Professionell distribution för lärarmiljöer
 
 ---
 

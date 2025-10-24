@@ -17,7 +17,12 @@ Automatisk generator för individuella PDF-rapporter från Excel-fil med LIA-bed
 
 ## 🚀 Komma igång
 
-### 💾 Installation
+### 🎯 **För lärare (Enklaste metoden)**
+1. **Ladda ner** `LIA_Rapportgenerator.exe` från release
+2. **Dubbelklicka** på exe-filen för att starta
+3. **Färdig!** - Inga installationer behövs
+
+### 💾 **För utvecklare (Python-källkod)**
 1. Ladda ner projektet
 2. Öppna terminal/kommandotolken i projektmappen
 3. Installera beroenden:
@@ -27,6 +32,10 @@ Automatisk generator för individuella PDF-rapporter från Excel-fil med LIA-bed
 
 ### ▶️ Starta applikationen
 ```bash
+# Med exe-fil (lärare)
+Dubbelklicka på LIA_Rapportgenerator.exe
+
+# Med Python (utvecklare)
 python main.py
 ```
 
