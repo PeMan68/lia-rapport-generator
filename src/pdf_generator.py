@@ -95,8 +95,32 @@ class LIAPDFGenerator:
                 logger.info(f"Genererar rapport {i}/{len(self.students_data)}: {student_name}")
                 
                 # Skapa säkert filnamn (ta bort specialtecken)
-                safe_filename = self._create_safe_filename(student_name)
-                output_path = os.path.join(output_directory, f"LIA_Rapport_{safe_filename}.pdf")
+                safe_student_name = self._create_safe_filename(student_name)
+                
+                # Skapa säkert praktiknamn för filnamn
+                safe_practice_name = ""
+                if practice_name:
+                    # Ta bort "LIA" från praktiknamnet för att undvika redundans
+                    cleaned_practice_name = practice_name
+                    # Ta bort olika varianter av LIA (case-insensitive) från början, mitt eller slut
+                    import re
+                    # Ta bort LIA i början med eventuell separator
+                    cleaned_practice_name = re.sub(r'^LIA[-\s]*', '', cleaned_practice_name, flags=re.IGNORECASE)
+                    # Ta bort LIA i mitten med separatorer
+                    cleaned_practice_name = re.sub(r'[-\s]+LIA[-\s]+', ' ', cleaned_practice_name, flags=re.IGNORECASE)
+                    # Ta bort LIA i slutet med eventuell separator
+                    cleaned_practice_name = re.sub(r'[-\s]+LIA$', '', cleaned_practice_name, flags=re.IGNORECASE)
+                    cleaned_practice_name = cleaned_practice_name.strip()
+                    
+                    if cleaned_practice_name:  # Endast om något finns kvar efter LIA-borttagning
+                        safe_practice_name = self._create_safe_filename(cleaned_practice_name)
+                        # Begränsa till första 20 tecken för att undvika för långa filnamn
+                        safe_practice_name = safe_practice_name[:20]
+                        safe_practice_name = f"{safe_practice_name}_"
+                
+                # Skapa filnamn med praktiknamn inkluderat
+                filename = f"LIA_{safe_practice_name}{safe_student_name}.pdf"
+                output_path = os.path.join(output_directory, filename)
                 
                 # Generera PDF
                 template = LIAReportTemplate()

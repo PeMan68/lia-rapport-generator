@@ -297,8 +297,7 @@ class LIAReportGUI:
             "Bekräfta generering",
             f"Generera PDF-rapporter för alla studenter?\n\n"
             f"Excel-fil: {os.path.basename(excel_path)}\n"
-            f"Utdatamapp: {output_dir}\n\n"
-            f"Detta kan ta en stund beroende på antal studenter."
+            f"Utdatamapp: {output_dir}"
         )
         
         if not result:

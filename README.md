@@ -10,7 +10,7 @@ Automatisk generator för individuella PDF-rapporter från Excel-fil med LIA-bed
 - 🖥️ Användarvänligt grafiskt gränssnitt
 - 🏢 Anpassningsbara praktiknamn och period i rapporter
 - ✅ **Automatisk strukturvalidering**: Identifierar kolumner och bedömningsområden automatiskt
-- 📁 Automatisk filorganisering med säkra filnamn
+- 📁 **Intelligent filnamning**: Inkluderar praktiknamn för enkel identifiering
 - 🔧 **Stödjer olika Q-frågeformat**: Fungerar med Q1-Q30, Q1-Q34, och andra varianter
 
 ## 🚀 Komma igång

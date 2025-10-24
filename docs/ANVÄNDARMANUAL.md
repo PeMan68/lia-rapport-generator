@@ -106,6 +106,13 @@ Varje PDF-rapport innehåller:
 - **Svart text** för optimal läsbarhet
 - **Korrekt svenska tecken** (ö, ä, å)
 - **Strukturerade tabeller** för bedömningar
+- **Intelligent filnamn**: `LIA_[Praktiknamn]_[Studentnamn].pdf`
+
+### 📁 Filnamnsexempel
+- **Med praktiknamn**: `LIA_Webbutveckling_Michael_Nilsson.pdf` (från "LIA Webbutveckling")
+- **Kort praktiknamn**: `LIA_Processteknik_HT2024_Anna_Andersson.pdf`
+- **Utan praktiknamn**: `LIA_Erik_Eriksson.pdf`
+- **Smart LIA-borttagning**: Automatiskt undviker dubbel-LIA i filnamn
 
 ## ❗ Felsökning
 
