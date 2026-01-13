@@ -44,7 +44,7 @@ logs/
 # PyInstaller build files
 build/
 dist/
-*.spec
+# *.spec - Kommenterad ut: vi vill ha .spec-filen i repo
 
 # Executables (comment out if you want to include exe in git)
 *.exe
