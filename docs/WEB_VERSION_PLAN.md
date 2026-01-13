@@ -3,7 +3,7 @@
 ## 📋 Översikt
 Plan för att konvertera desktop-applikationen till en web-baserad lösning med Pyodide (Python i webbläsaren). Helt frontend-baserad utan behov av server.
 
-**Utvecklingstid**: 9 timmar (baserat på att v1.0.0 desktop tog 3h)  
+**Utvecklingstid**: 9 timmar (baserat på att v1.0.1 desktop tog 3h)  
 **Hosting-kostnad**: 0 SEK/månad (GitHub Pages)  
 **Målgrupp**: Lärare på alla plattformar (Windows, Mac, Linux, mobil)
 

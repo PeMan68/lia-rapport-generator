@@ -1,4 +1,4 @@
-# 🚀 LIA Rapportgenerator v1.0.0 - GitHub Release
+# 🚀 LIA Rapportgenerator v1.0.1 - GitHub Release
 
 ## 📋 **Release Status: ✅ KOMPLETT**
 
@@ -6,7 +6,7 @@
 - ✅ **Release branch** skapad och utvecklad
 - ✅ **Merged till master** - Produktionskod
 - ✅ **Merged till develop** - Fortsatt utveckling
-- ✅ **Tag v1.0.0** skapad och pushad
+- ✅ **Tag v1.0.1** skapad och pushad
 - ✅ **Branches pushade** till GitHub
 
 ---
@@ -29,12 +29,12 @@ https://github.com/PeMan68/lia-rapport-generator
 
 #### **2. Skapa ny Release**
 - Klicka **"Releases"** → **"Create a new release"**
-- **Tag version**: `v1.0.0` (redan pushad)
-- **Release title**: `LIA Rapportgenerator v1.0.0`
+- **Tag version**: `v1.0.1` (redan pushad)
+- **Release title**: `LIA Rapportgenerator v1.0.1`
 
 #### **3. Release Description** (copy-paste):
 ```markdown
-# 🎓 LIA Rapportgenerator v1.0.0
+# 🎓 LIA Rapportgenerator v1.0.1
 
 **Första produktionsklara versionen** av automatisk rapportgenerator för LIA-bedömningar.
 
@@ -98,7 +98,7 @@ https://github.com/PeMan68/lia-rapport-generator
 
 ### **För utvecklare:**
 - ✅ **Källkod** tillgänglig via Git
-- ✅ **Tag v1.0.0** för specifik version
+- ✅ **Tag v1.0.1** för specifik version
 - ✅ **Issues och Pull Requests** för förbättringar
 
 ### **För IT-avdelningar:**
@@ -112,7 +112,7 @@ https://github.com/PeMan68/lia-rapport-generator
 
 - ✅ **Kod**: Utveckling och testning klar
 - ✅ **Git Flow**: Release branch mergad till master/develop
-- ✅ **Tags**: v1.0.0 pushad till GitHub
+- ✅ **Tags**: v1.0.1 pushad till GitHub
 - ✅ **Exe-fil**: Byggd och testad (42.8 MB)
 - ✅ **Dokumentation**: README, manuals, distribution guide
 - ⏳ **GitHub Release**: Skapa med exe-fil som attachment

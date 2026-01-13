@@ -98,7 +98,7 @@ pyinstaller LIA_Rapportgenerator.spec
 
 ## 🗂️ Distributionspaket
 
-### 📦 **Release v1.0.0 innehåller:**
+### 📦 **Release v1.0.1 innehåller:**
 
 #### **För användare:**
 - `LIA_Rapportgenerator.exe` - Färdig applikation
