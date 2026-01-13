@@ -489,7 +489,7 @@ jobs:
 ## 📅 **När implementera?**
 
 ### **Bra tidpunkter:**
-- ✅ **Efter v1.0.0 release** (nu) - Desktop-versionen är stabil
+- ✅ **Efter v1.0.1 release** (nu) - Desktop-versionen är stabil
 - ✅ **Sommarsemester-projekt** - Kul sidoprojekt
 - ✅ **Vid användarfeedback** - Om plattformsoberoende efterfrågas
 - ✅ **Före nästa LIA-period** - Mer tid för testning
