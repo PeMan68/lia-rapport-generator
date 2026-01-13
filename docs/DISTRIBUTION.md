@@ -55,15 +55,25 @@ python main.py
 ```
 
 ### 🔨 Bygga egen exe-fil
+
+#### **Enkelt sätt (Rekommenderat)**
+```bash
+# Kör byggscriptet
+build_exe.bat
+```
+
+#### **Manuellt sätt**
 ```bash
 # Installera PyInstaller
 pip install pyinstaller
 
-# Bygg exe-fil
-pyinstaller --onefile --windowed --name "LIA_Rapportgenerator" main.py
+# Bygg exe-fil med spec-filen (inkluderar alla src-moduler)
+pyinstaller LIA_Rapportgenerator.spec
 
-# Exe-fil skapas i dist/
+# Exe-fil skapas i dist/LIA_Rapportgenerator.exe
 ```
+
+**OBS:** Använd `.spec`-filen för att säkerställa att alla moduler från `src/` och `templates/` inkluderas korrekt!
 
 ---
 
@@ -88,7 +98,7 @@ pyinstaller --onefile --windowed --name "LIA_Rapportgenerator" main.py
 
 ## 🗂️ Distributionspaket
 
-### 📦 **Release v1.0.0 innehåller:**
+### 📦 **Release v1.0.1 innehåller:**
 
 #### **För användare:**
 - `LIA_Rapportgenerator.exe` - Färdig applikation

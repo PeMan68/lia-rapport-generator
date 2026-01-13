@@ -50,7 +50,7 @@ python main.py
 
 ## 📊 Excel-filformat
 
-### 🔧 Flexibel strukturstöd
+### 🔧 Flexibelt strukturstöd
 Applikationen anpassar sig automatiskt till olika Excel-format med liknande struktur:
 
 ### Obligatoriska kolumner (identifieras automatiskt):
@@ -79,21 +79,13 @@ Applikationen anpassar sig automatiskt till olika Excel-format med liknande stru
 - Student, företag, handledare, närvarotid
 
 ### 📊 Bedömning
-- 14 bedömningsområden med betyg och kommentarer:
+- Olika antal bedömningsområden med betyg och kommentarer, t. ex.:
   - Arbetets kvalitet
   - Arbetstider
   - Kreativitet
   - Intresse för arbetet
   - Initiativförmåga
   - Samarbetsförmåga
-  - Kunskap om risker
-  - Eldistribution
-  - Dokumentation
-  - Problemredogörelse
-  - Felsökning
-  - Säkerhetskunskap
-  - Installation och drift
-  - Förebyggande underhåll
 
 ### 🎯 Sammanfattning
 - Helhetsintryck
