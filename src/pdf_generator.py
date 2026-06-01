@@ -66,15 +66,16 @@ class LIAPDFGenerator:
             logger.error(f"Fel vid laddning av Excel-fil: {e}")
             return False
     
-    def generate_all_reports(self, output_directory: str, practice_name: str = "", practice_period: str = "") -> Dict[str, str]:
+    def generate_all_reports(self, output_directory: str, practice_name: str = "", practice_period: str = "", comment_exclusions: dict = None) -> Dict[str, str]:
         """
         Genererar PDF-rapporter för alla studenter
-        
+
         Args:
             output_directory (str): Mapp där PDF-filer ska sparas
             practice_name (str): Namn på praktiken
             practice_period (str): Period för praktiken
-            
+            comment_exclusions (dict): Kommentarer att dölja, se CommentFilterDialog
+
         Returns:
             Dict[str, str]: Mapping av studentnamn till filsökvägar
         """
@@ -128,7 +129,8 @@ class LIAPDFGenerator:
                     student_data=student,
                     output_path=output_path,
                     practice_name=practice_name,
-                    practice_period=practice_period
+                    practice_period=practice_period,
+                    comment_exclusions=comment_exclusions,
                 )
                 
                 generated_files[student_name] = output_path
@@ -142,25 +144,26 @@ class LIAPDFGenerator:
         logger.info(f"🎉 Klart! {successful_count}/{len(self.students_data)} rapporter skapade")
         return generated_files
     
-    def generate_single_report(self, student_name: str, output_path: str) -> bool:
+    def generate_single_report(self, student_name: str, output_path: str, comment_exclusions: dict = None) -> bool:
         """
         Genererar PDF-rapport för en specifik student
-        
+
         Args:
             student_name (str): Namn på student
             output_path (str): Sökväg där PDF ska sparas
-            
+            comment_exclusions (dict): Kommentarer att dölja, se CommentFilterDialog
+
         Returns:
             bool: True om framgångsrik generering
         """
         student_data = self.excel_reader.get_student_by_name(student_name)
-        
+
         if not student_data:
             logger.error(f"Student '{student_name}' hittades inte")
             return False
-        
+
         try:
-            self.pdf_template.create_report(student_data, output_path)
+            self.pdf_template.create_report(student_data, output_path, comment_exclusions=comment_exclusions)
             logger.info(f"✅ Rapport skapad för {student_name}: {output_path}")
             return True
         except Exception as e:

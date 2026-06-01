@@ -17,6 +17,7 @@ sys.path.insert(0, current_dir)
 sys.path.insert(0, project_root)
 
 from pdf_generator import LIAPDFGenerator
+from comment_filter import CommentFilterDialog
 
 class LIAReportGUI:
     """Huvudklass för GUI-applikationen"""
@@ -34,6 +35,7 @@ class LIAReportGUI:
         self.practice_period = tk.StringVar()
         self.generator = LIAPDFGenerator()
         self.students_data = []
+        self.comment_exclusions = {}
         
         # Sätt default värden
         self.output_directory.set(os.path.join(os.getcwd(), "output"))
@@ -147,15 +149,23 @@ class LIAReportGUI:
         button_frame.columnconfigure(1, weight=1)
         
         self.validate_button = ttk.Button(
-            button_frame, 
-            text="Validera Excel-fil", 
+            button_frame,
+            text="Validera Excel-fil",
             command=self.validate_excel_file
         )
         self.validate_button.grid(row=0, column=0, sticky=tk.W, padx=(0, 10))
-        
+
+        self.review_button = ttk.Button(
+            button_frame,
+            text="Granska kommentarer",
+            command=self.review_comments,
+            state="disabled"
+        )
+        self.review_button.grid(row=0, column=1, padx=10)
+
         self.generate_button = ttk.Button(
-            button_frame, 
-            text="Generera alla rapporter", 
+            button_frame,
+            text="Generera alla rapporter",
             command=self.generate_all_reports,
             state="disabled"
         )
@@ -195,6 +205,8 @@ class LIAReportGUI:
         
         if file_path:
             self.excel_file_path.set(file_path)
+            self.comment_exclusions = {}
+            self.review_button.config(state="disabled")
             self.display_info(f"Excel-fil vald: {file_path}\n\n"
                              "Klicka 'Validera Excel-fil' för att kontrollera innehållet.")
             self.generate_button.config(state="disabled")
@@ -232,10 +244,14 @@ class LIAReportGUI:
         try:
             excel_path = self.excel_file_path.get()
             validation_result = self.generator.validate_excel_structure(excel_path)
-            
+
+            if validation_result['valid']:
+                # Ladda data så den finns redo för kommentarsgranskning
+                self.generator.load_excel_file(excel_path)
+
             # Uppdatera GUI från main thread
             self.root.after(0, self._handle_validation_result, validation_result)
-            
+
         except Exception as e:
             error_msg = f"Fel vid validering: {str(e)}"
             self.root.after(0, self._handle_validation_error, error_msg)
@@ -263,9 +279,11 @@ class LIAReportGUI:
             
             self.display_info(info_text)
             self.generate_button.config(state="normal")
+            self.review_button.config(state="normal")
             self.status_label.config(text=f"Redo att generera {student_count} rapporter")
-            
+
         else:
+            self.review_button.config(state="disabled")
             error_msg = validation_result['error']
             self.display_info(f"❌ Excel-fil ogiltig\n\n"
                              f"Fel: {error_msg}\n\n"
@@ -283,6 +301,28 @@ class LIAReportGUI:
         self.display_info(f"❌ Fel vid validering\n\n{error_msg}")
         self.status_label.config(text="Fel vid validering")
     
+    def review_comments(self):
+        """Öppnar dialog för granskning och selektiv filtrering av kommentarer"""
+        if not self.generator.students_data:
+            from tkinter import messagebox
+            messagebox.showwarning("Varning", "Validera Excel-filen först.")
+            return
+
+        dialog = CommentFilterDialog(self.root, self.generator.students_data)
+
+        if not dialog.cancelled:
+            self.comment_exclusions = dialog.exclusions
+            hidden_count = sum(
+                len(s.get('assessments', {})) + (1 if 'final_comments' in s else 0)
+                for s in self.comment_exclusions.values()
+            )
+            if hidden_count > 0:
+                self.status_label.config(
+                    text=f"{hidden_count} kommentar(er) markerade att döljas"
+                )
+            else:
+                self.status_label.config(text="Inga kommentarer dolda — alla visas")
+
     def generate_all_reports(self):
         """Genererar alla PDF-rapporter"""
         excel_path = self.excel_file_path.get()
@@ -326,9 +366,10 @@ class LIAReportGUI:
             
             # Generera rapporter med praktikinfo
             generated_files = self.generator.generate_all_reports(
-                output_dir, 
+                output_dir,
                 practice_name=practice_name,
-                practice_period=practice_period
+                practice_period=practice_period,
+                comment_exclusions=self.comment_exclusions,
             )
             
             # Uppdatera GUI med resultat
