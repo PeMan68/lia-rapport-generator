@@ -12,6 +12,7 @@ a = Analysis(
     binaries=[],
     datas=[
         # Inkludera alla Python-filer från src/
+        ('src/comment_filter.py', 'src'),
         ('src/excel_reader.py', 'src'),
         ('src/flexible_excel_reader.py', 'src'),
         ('src/gui.py', 'src'),
@@ -21,6 +22,7 @@ a = Analysis(
     ],
     hiddenimports=[
         # Explicit inkludera alla src-moduler
+        'src.comment_filter',
         'src.excel_reader',
         'src.flexible_excel_reader',
         'src.gui',
