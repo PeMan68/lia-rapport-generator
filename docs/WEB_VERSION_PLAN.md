@@ -3,9 +3,53 @@
 ## 📋 Översikt
 Plan för att konvertera desktop-applikationen till en web-baserad lösning med Pyodide (Python i webbläsaren). Helt frontend-baserad utan behov av server.
 
-**Utvecklingstid**: 9 timmar (baserat på att v1.0.1 desktop tog 3h)  
+**Ursprunglig uppskattning**: 9 timmar — se ⚠️ Risker nedan, realistisk uppskattning är 20+ timmar  
 **Hosting-kostnad**: 0 SEK/månad (GitHub Pages)  
 **Målgrupp**: Lärare på alla plattformar (Windows, Mac, Linux, mobil)
+
+---
+
+## ⚠️ Kritisk risk med Pyodide-ansatsen
+
+### ReportLab stöds inte i WebAssembly
+ReportLab har C-extensions och finns **inte** i Pyodides officiella paketlista.
+`micropip.install("reportlab")` i kodexemplet nedan fungerar troligen inte.
+PDF-generering är appens kärnvärde — utan ReportLab måste hela `rapport_mall.py`
+skrivas om med ett WASM-kompatibelt bibliotek (t.ex. `fpdf2`).
+
+### Övriga risker
+- **Initial laddning 15–30 sek** (15+ MB Pyodide-runtime) — sämre UX än desktop-exe
+- **70% kodåterbruk är optimistiskt**: JS↔Python-bryggan kräver mer anpassning än vad exempelkoden visar
+- **Realistisk tidsåtgång**: 20–30 timmar, inte 9
+
+---
+
+## 🔄 Alternativa ansatser
+
+| Alternativ | Teknik | Plattform | Kodåterbruk | Svårighet | Hosting |
+|---|---|---|---|---|---|
+| **Pyodide** (denna plan) | Python i browser | Alla | ~50% (ReportLab-risk) | Hög | Gratis |
+| **Streamlit** ⭐ | Python-webb | Alla | ~85% | Låg | Gratis* |
+| **Flask/FastAPI** | Server + HTML | Alla | ~95% | Medel | Server krävs |
+| **Electron/Tauri** | Desktop cross-plat. | Win/Mac/Linux | ~95% | Medel | N/A |
+| **Behåll desktop** | PyInstaller | Windows | 100% | Minimal | N/A |
+
+### ⭐ Rekommendation: Streamlit
+
+Om webb är målet är Streamlit det bästa alternativet för detta projekt:
+
+- **`flexible_excel_reader.py`, `pdf_generator.py` och `rapport_mall.py` fungerar oförändrade** — ReportLab körs normalt på servern
+- Streamlit Cloud är gratis för publika repon
+- UI skrivs om på ~3 timmar (formulär + filuppladdning)
+- **Totalt: 4–6 timmar** för en fullt fungerande version inkl. kommentarsgranskning
+
+**Nackdel att beakta**: Data bearbetas på Streamlit:s server (inte lokalt i webbläsaren).
+Normalt acceptabelt för skolmiljö, men värt att stämma av mot IT/GDPR-krav.
+
+**Tumregel**: Om användarna är uteslutande Windows — behåll desktop-exe.
+Om Mac/Linux-stöd eller "ingen installation" efterfrågas — välj Streamlit över Pyodide.
+
+---
 
 ---
 
