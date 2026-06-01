@@ -24,7 +24,7 @@ class LIAReportGUI:
     
     def __init__(self, root):
         self.root = root
-        self.root.title("LIA Rapportgenerator v1.0.1")
+        self.root.title("LIA Rapportgenerator v1.1.0")
         self.root.geometry("700x600")
         self.root.resizable(True, True)
         
