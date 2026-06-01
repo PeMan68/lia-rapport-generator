@@ -72,15 +72,16 @@ class LIAReportTemplate:
             textColor=colors.black
         ))
     
-    def create_report(self, student_data, output_path, practice_name="", practice_period=""):
+    def create_report(self, student_data, output_path, practice_name="", practice_period="", comment_exclusions=None):
         """
         Skapar en PDF-rapport för en student
-        
+
         Args:
             student_data (dict): Studentdata från Excel-läsaren
             output_path (str): Sökväg där PDF ska sparas
             practice_name (str): Namn på praktiken
             practice_period (str): Period för praktiken
+            comment_exclusions (dict): Kommentarer att dölja, se CommentFilterDialog
         """
         # Skapa output-mapp om den inte finns
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -113,10 +114,10 @@ class LIAReportTemplate:
         story.extend(self._create_basic_info_section(student_data, practice_name, practice_period))
         
         # Bedömningar
-        story.extend(self._create_assessments_section(student_data))
-        
+        story.extend(self._create_assessments_section(student_data, comment_exclusions))
+
         # Sammanfattning
-        story.extend(self._create_summary_section(student_data))
+        story.extend(self._create_summary_section(student_data, comment_exclusions))
         
         # Generera PDF
         doc.build(story)
@@ -159,47 +160,46 @@ class LIAReportTemplate:
         
         return content
     
-    def _create_assessments_section(self, student_data):
+    def _create_assessments_section(self, student_data, exclusions=None):
         """Skapar bedömnings-sektionen"""
         content = []
-        
+
         content.append(Paragraph("► BEDÖMNING", self.styles['SectionHeader']))
-        
+
         assessments = student_data.get('assessments', [])
-        
-        for assessment in assessments:
-            # Område namn och betyg
+        student_excl = (exclusions or {}).get(student_data.get('student_name', ''), {})
+        hidden_assessments = student_excl.get('assessments', {})
+
+        for i, assessment in enumerate(assessments):
             grade_text = self._format_grade(assessment.get('grade', ''))
             area_text = f"<b>{assessment.get('name', '')}</b>"
             if assessment.get('description'):
                 area_text += f" - {assessment.get('description', '')}"
-            
+
             content.append(Paragraph(area_text, self.styles['SubHeader']))
             content.append(Paragraph(f"<b>Betyg:</b> {grade_text}", self.styles['CustomBodyText']))
-            
-            # Kommentar om den finns
+
             comment = assessment.get('comment', '').strip()
-            if comment:
+            if comment and hidden_assessments.get(i, True):
                 content.append(Paragraph(f"<b>Kommentar:</b> {comment}", self.styles['Comment']))
-            
+
             content.append(Spacer(1, 8))
-        
+
         return content
     
-    def _create_summary_section(self, student_data):
+    def _create_summary_section(self, student_data, exclusions=None):
         """Skapar sammanfattnings-sektionen"""
         content = []
-        
+
         content.append(Paragraph("► SAMMANFATTNING", self.styles['SectionHeader']))
-        
-        # Helhetsintryck
+
         overall = student_data.get('overall_impression', '')
         overall_formatted = self._format_grade(overall)
         content.append(Paragraph(f"<b>Helhetsintryck:</b> {overall_formatted}", self.styles['CustomBodyText']))
-        
-        # Avslutande kommentarer
+
+        student_excl = (exclusions or {}).get(student_data.get('student_name', ''), {})
         final_comments = student_data.get('final_comments', '').strip()
-        if final_comments:
+        if final_comments and student_excl.get('final_comments', True):
             content.append(Spacer(1, 12))
             content.append(Paragraph("<b>Avslutande kommentarer:</b>", self.styles['SubHeader']))
             content.append(Paragraph(final_comments, self.styles['CustomBodyText']))
