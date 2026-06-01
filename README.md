@@ -1,6 +1,6 @@
 # 🎓 LIA Rapportgenerator
 
-**Version 1.0.0** - Produktionsklar automatisk generator för individuella PDF-rapporter från Excel-fil med LIA-bedömningar.
+**Version 1.1.0** - Produktionsklar automatisk generator för individuella PDF-rapporter från Excel-fil med LIA-bedömningar.
 
 ## 📋 Beskrivning
 Automatisk generator för individuella PDF-rapporter från Excel-fil med LIA-bedömningar. Skapar professionella rapporter för varje student baserat på praktikbedömningar. **Anpassar sig automatiskt till olika Excel-format** med liknande struktur.
@@ -11,6 +11,7 @@ Automatisk generator för individuella PDF-rapporter från Excel-fil med LIA-bed
 - 🎨 Professionell layout med strukturerade sektioner
 - 🖥️ Användarvänligt grafiskt gränssnitt
 - 🏢 Anpassningsbara praktiknamn och period i rapporter
+- 🔍 **Selektiv kommentarsgranskning**: granska och dölj enstaka kommentarer per student innan PDF-generering
 - ✅ **Automatisk strukturvalidering**: Identifierar kolumner och bedömningsområden automatiskt
 - 📁 **Intelligent filnamning**: Inkluderar praktiknamn för enkel identifiering
 - 🔧 **Stödjer olika Q-frågeformat**: Fungerar med Q1-Q30, Q1-Q34, och andra varianter
@@ -46,7 +47,8 @@ python main.py
    - ✅ Automatisk strukturidentifiering
 3. **Välj utdatamapp**: Ange var PDF-rapporterna ska sparas
 4. **Validera**: Klicka "Validera Excel-fil" för att kontrollera innehållet
-5. **Generera**: Klicka "Generera alla rapporter" för att skapa PDF:er
+5. **Granska** *(valfritt)*: Klicka "Granska kommentarer" för att dölja enstaka kommentarer i studentversionen
+6. **Generera**: Klicka "Generera alla rapporter" för att skapa PDF:er
 
 ## 📊 Excel-filformat
 
@@ -109,9 +111,10 @@ Applikationen anpassar sig automatiskt till olika Excel-format med liknande stru
 LIA-Rapportgenerator/
 ├── main.py              # Huvudapplikation
 ├── src/
-│   ├── excel_reader.py  # Excel-filhantering
-│   ├── pdf_generator.py # PDF-generering
-│   └── gui.py          # Grafiskt gränssnitt
+│   ├── excel_reader.py      # Excel-filhantering
+│   ├── pdf_generator.py     # PDF-generering
+│   ├── gui.py               # Grafiskt gränssnitt
+│   └── comment_filter.py    # Kommentarsgranskningsdialog
 ├── templates/
 │   └── rapport_mall.py  # PDF-rapportmall
 ├── output/             # Genererade PDF:er
@@ -159,7 +162,9 @@ python gui.py
 Detta projekt är skapat för utbildningsändamål.
 
 ## 🆔 Version
-v1.0 - Första stabila version
+- **v1.1.0** - Selektiv kommentarsgranskning
+- **v1.0.1** - Buggfixar
+- **v1.0.0** - Första stabila version
 
 ---
 *Skapad för att förenkla LIA-rapportering för lärare och handledare*
